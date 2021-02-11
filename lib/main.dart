@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertube/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "FlutterTube",
-      home: Home(),
+      home: HomeScreen(),
     );
   }
 }
