@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "FlutterTube",
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
