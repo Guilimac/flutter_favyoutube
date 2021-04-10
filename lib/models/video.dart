@@ -8,12 +8,13 @@ class Video{
   Video({this.id,this.title,this.thumb,this.channel});
 
   factory Video.fromJson(Map<String,dynamic> json){
-    return Video(
+    var video = Video(
       id: json["id"]["videoId"],
       title: json["snippet"]["title"],
       thumb: json["snippet"]["thumbnails"]["high"]["url"],
       channel: json["snippet"]["channelTitle"]
     );
+    return video;
   }
 
 }

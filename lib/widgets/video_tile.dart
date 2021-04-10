@@ -1,4 +1,6 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertube/blocs/favorite_bloc.dart';
 import 'package:fluttertube/models/video.dart';
 
 class VideoTile extends StatelessWidget {
@@ -8,6 +10,7 @@ class VideoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final blocfav = BlocProvider.of<FavoriteBloc>(context);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       child: Column(
@@ -31,6 +34,7 @@ class VideoTile extends StatelessWidget {
                     child: Text(
                       video.title,
                       style: TextStyle(color: Colors.white, fontSize: 14),
+                      maxLines: 2 ,
                     ),
                   ),
                   Padding(
@@ -41,7 +45,25 @@ class VideoTile extends StatelessWidget {
                     ),
                   )
                 ],
-              ))
+              )),
+              StreamBuilder<Map<String,Video>>(
+                  stream: blocfav.outFav,
+                  initialData: {},
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return IconButton(
+                          icon: Icon(snapshot.data.containsKey(video.id)?
+                            Icons.star:Icons.star_border
+                          ),
+                          color: Colors.white,
+                          iconSize: 30,
+                          onPressed: (){
+                            blocfav.toggleFAvorite(video);
+                          });
+                    }
+                    return CircularProgressIndicator();
+                }
+              )
             ],
           )
         ],
